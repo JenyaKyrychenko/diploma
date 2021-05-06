@@ -1,10 +1,10 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react'
-import {useHttp} from "../hooks/http.hook";
-import {AuthContext} from "../context/AuthContext";
-import {useMessage} from "../hooks/message.hook";
-import {Loader} from "./Loader";
+import {useHttp} from "../../hooks/http.hook";
+import {AuthContext} from "../../context/AuthContext";
+import {useMessage} from "../../hooks/message.hook";
+import {Loader} from "../Loader";
 
-export const Content = ({specialitys}) => {
+export const ChooseSpeciality = ({specialitys}) => {
     const message = useMessage()
     const {userId} = useContext(AuthContext)
     const {request} = useHttp()

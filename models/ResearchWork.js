@@ -19,6 +19,7 @@ const ResearchWork = sequelize.define("researchWork", {
 });
 
 User.hasMany(ResearchWork)
+ResearchWork.belongsTo(User)
 
 
 module.exports = ResearchWork

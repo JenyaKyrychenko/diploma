@@ -2,10 +2,11 @@ import React,{useContext,useState,useEffect,useCallback} from 'react'
 import {Sidebar} from "../../components/Sidebar";
 import {Footer} from "../../components/Footer";
 import {Topbar} from "../../components/Topbar";
-import {Content} from "../../components/Content";
+import {ChooseSpeciality} from "../../components/StudentsComponents/ChooseSpeciality";
 import {AuthContext} from "../../context/AuthContext";
 import {useHttp} from "../../hooks/http.hook";
 import {Loader} from "../../components/Loader";
+import {LoadResearchWork} from "../../components/StudentsComponents/LoadResearchWork";
 
 export const StudentHomePage = () => {
     const {userId} = useContext(AuthContext)
@@ -46,7 +47,8 @@ export const StudentHomePage = () => {
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <Topbar userData={userData}/>
-                    <Content specialitys={specialitys}/>
+                    <ChooseSpeciality specialitys={specialitys}/>
+                    <LoadResearchWork/>
                 </div>
                 <Footer/>
             </div>
