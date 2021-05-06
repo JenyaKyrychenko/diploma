@@ -4,9 +4,15 @@ const config = require('config')
 const jwt = require('jsonwebtoken')
 const {check, validationResult} = require('express-validator')
 const User = require('./../models/User')
+const ResearchWork = require('../models/ResearchWork')
+const Mentor = require('../models/Mentor')
+const Specislity = require('../models/Speciality')
+const Declaration = require('../models/Declaration')
+const Exam = require('../models/Exam')
 const router = Router()
+const bodyParser = require('body-parser')
 
-// const urlencodedParser = bodyParser.urlencoded({extended: false});
+const urlencodedParser = bodyParser.urlencoded({extended: false});
 
 // /api/auth/registration
 router.post('/registration',
@@ -108,11 +114,42 @@ router.get('/users', async (req, res) => {
 router.get('/users/:id', async (req, res) => {
     try {
         const id = req.params.id
-        const user = await User.findByPk(id,{raw:true})
-        res.json({user})
+        const user = await User.findOne({where:{id}})
+        // await user.addWork(work)
+        res.json(user)
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так!'})
     }
 })
+
+// router.get('/users/:id', async (req, res) => {
+//     try {
+//         const id = req.params.id
+//         const user = await User.findOne({where:{id},include:Mentor})
+//         const mentor = await Mentor.findOne({where:{firstName:'Nasty'},include:User})
+//         // await mentor.addUser(user)
+//         // await user.addWork(work)
+//         res.json(mentor)
+//     } catch (e) {
+//         res.status(500).json({message: 'Что-то пошло не так!'})
+//     }
+// })
+
+// router.get('/users/:id', async (req, res) => {
+//     try {
+//         const id = req.params.id
+//         const exam = await Exam.findOne({where:{id:2},include:User})
+//         const user = await User.findOne({where:{id:1},include:Exam})
+//         await user.addExam(exam)
+//         console.log(await user.exams.getSpeciality())
+//         res.json(user.exams)
+//     } catch (e) {
+//         console.log(e)
+//         res.status(500).json({message: 'Что-то пошло не так!'})
+//     }
+// })
+
+
+
 
 module.exports = router

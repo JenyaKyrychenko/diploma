@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize')
 const sequelize = require('./../Database/connect')
+const User = require('./User')
 
-const User = sequelize.define("user", {
+const Mentor = sequelize.define("mentor", {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -20,33 +21,17 @@ const User = sequelize.define("user", {
         unique: false,
         allowNull: false
     },
-    email: {
+    scienceTitle: {
         type: Sequelize.STRING,
         required: true,
-        unique: true,
         allowNull: false
-    },
-    password: {
-        type: Sequelize.STRING,
-        required: true,
-        allowNull: false,
-    },
-    status: {
-        type: Sequelize.STRING,
-        required: true,
-        allowNull: false,
-        defaultValue: 'student'
-    },
-    admissionResult: {
-        type: Sequelize.BOOLEAN,
-        required:false,
-        defaultValue: false
     }
 }, {
     charset: 'utf8',
     collate: 'utf8_general_ci'
 });
 
+Mentor.hasMany(User)
+User.belongsTo(Mentor)
 
-
-module.exports = User
+module.exports = Mentor

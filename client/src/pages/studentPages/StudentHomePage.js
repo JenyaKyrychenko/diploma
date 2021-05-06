@@ -11,6 +11,7 @@ export const StudentHomePage = () => {
     const {userId} = useContext(AuthContext)
     const {request, loading} = useHttp()
     const [userData, setUserData] = useState(null)
+    const [specialitys, setSpecialitys] = useState(null)
 
     const getName = useCallback(async ()=>{
         try {
@@ -20,16 +21,23 @@ export const StudentHomePage = () => {
         }
     }, [userId, request])
 
+    const getSpeciality = useCallback(async () => {
+        try {
+            const specialitysData = await request('/api/speciality/', 'GET')
+            setSpecialitys(specialitysData)
+        } catch (e) {
+            console.log(e)
+        }
+    }, [request])
+
 
     useEffect(()=>{
         getName()
-    },[getName])
+        getSpeciality()
+    },[getName, getSpeciality])
 
     if(loading){
         return <Loader/>
-    }
-    if(userData){
-        console.log(userData.user)
     }
 
     return (
@@ -37,8 +45,8 @@ export const StudentHomePage = () => {
             <Sidebar/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
-                    <Topbar/>
-                    <Content/>
+                    <Topbar userData={userData}/>
+                    <Content specialitys={specialitys}/>
                 </div>
                 <Footer/>
             </div>

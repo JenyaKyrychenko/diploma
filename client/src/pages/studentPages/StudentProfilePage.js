@@ -28,16 +28,13 @@ export const StudentProfilePage = () => {
     if(loading){
         return <Loader/>
     }
-    if(userData){
-        console.log(userData.user)
-    }
 
     return (
         <div id='wrapper'>
             <Sidebar/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
-                    <Topbar/>
+                    <Topbar userData={userData}/>
                     {!loading && userData && <Profile userData={userData}/>}
                 </div>
                 <Footer/>

@@ -1,34 +1,11 @@
-import React, {useContext,useCallback,useEffect,useState} from 'react'
+import React, {useContext} from 'react'
 import undrawProfile from './../img/undraw_profile.svg'
 import {NavLink} from "react-router-dom";
 import {AuthContext} from "../context/AuthContext";
-import {useHttp} from "../hooks/http.hook";
-import {Loader} from "./Loader";
 
-export const Topbar = ()=>{
-    const {logout,userId} = useContext(AuthContext)
-    const {request, loading} = useHttp()
-    const [userData, setUserData] = useState(null)
+export const Topbar = ({userData})=>{
+    const {logout} = useContext(AuthContext)
 
-    const getName = useCallback(async ()=>{
-        try {
-            const data = await request(`/api/auth/users/${userId}`, 'GET')
-            setUserData(data)
-        }catch (e) {
-        }
-    }, [userId, request])
-
-
-    useEffect(()=>{
-        getName()
-    },[getName])
-
-    if(loading){
-        return <Loader/>
-    }
-    if(userData){
-        console.log(userData.user)
-    }
     const logoutHandler = () =>{
         logout()
     }
@@ -74,7 +51,7 @@ export const Topbar = ()=>{
                 <li className="nav-item dropdown no-arrow">
                     <NavLink className="nav-link dropdown-toggle" to="#" id="userDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {userData && <span className="mr-2 d-none d-lg-inline text-gray-600 small">{userData.user.status} {userData.user.firstName} {userData.user.lastName}</span>}
+                        {userData && <span className="mr-2 d-none d-lg-inline text-gray-600 small">{userData.status} {userData.firstName} {userData.lastName}</span>}
                         <img className="img-profile rounded-circle"
                              src={undrawProfile} alt='Profile'/>
                     </NavLink>
