@@ -47,11 +47,11 @@ export const LoginPage = () => {
                                         <form className="user">
                                             <div className="form-group">
                                                 <input type="email" className="form-control form-control-user"
-                                                       id="email" placeholder="Enter Email Address..." name='email' onChange={changeHandler}/>
+                                                       id="email" placeholder="Enter Email Address..." name='email' value={form.email} onChange={changeHandler}/>
                                             </div>
                                             <div className="form-group">
                                                 <input type="password" className="form-control form-control-user"
-                                                       id="password" placeholder="Password" name='password' onChange={changeHandler}/>
+                                                       id="password" placeholder="Password" name='password' value={form.password} onChange={changeHandler}/>
                                             </div>
                                             <div className="form-group">
                                                 <div className="custom-control custom-checkbox small">
@@ -67,7 +67,7 @@ export const LoginPage = () => {
                                         </form>
                                         <hr/>
                                         <div className="text-center">
-                                            <a className="small" href="forgot-password.html">Forgot Password?</a>
+                                            <NavLink className="small" to='#'>Forgot Password?</NavLink>
                                         </div>
                                         <div className="text-center">
                                             <NavLink className="small" to='/registration' >Create an Account!</NavLink>

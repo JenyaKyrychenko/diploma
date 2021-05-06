@@ -108,7 +108,7 @@ router.get('/users', async (req, res) => {
 router.get('/users/:id', async (req, res) => {
     try {
         const id = req.params.id
-        const user = await User.findOne({where:{id}})
+        const user = await User.findByPk(id,{raw:true})
         res.json({user})
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так!'})

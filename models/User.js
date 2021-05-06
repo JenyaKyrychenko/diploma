@@ -36,7 +36,7 @@ const User = sequelize.define("user", {
         required: true,
         allowNull: false,
         defaultValue: 'student'
-    },
+    }
 }, {
     charset: 'utf8',
     collate: 'utf8_general_ci'

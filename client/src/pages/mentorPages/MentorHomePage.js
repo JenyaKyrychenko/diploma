@@ -2,6 +2,9 @@ import React, {useContext} from 'react'
 import {AuthContext} from "../../context/AuthContext";
 import {useHttp} from "../../hooks/http.hook";
 import {NavLink} from "react-router-dom";
+import {Sidebar} from "../../components/Sidebar";
+import {Topbar} from "../../components/Topbar";
+import {Footer} from "../../components/Footer";
 
 export const MentorHomePage = () =>{
     const auth = useContext(AuthContext)
@@ -17,11 +20,14 @@ export const MentorHomePage = () =>{
         }
     }
     return (
-        <div>
-            <h1>Mentor HomePage</h1>
-            <button onClick={getName}>Get Name</button>
-            <button onClick={auth.logout}>Logout</button>
-            <NavLink to='/mentor/createform'><strong>To</strong></NavLink>
+        <div id='wrapper'>
+            <Sidebar/>
+            <div id="content-wrapper" className="d-flex flex-column">
+                <div id="content">
+                    <Topbar/>
+                </div>
+                <Footer/>
+            </div>
         </div>
     )
 }

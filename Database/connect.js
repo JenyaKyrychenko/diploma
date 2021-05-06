@@ -10,6 +10,6 @@ const sequelize = new Sequelize('diploma', 'root', 'root', {
     }
 })
 
-// sequelize.sync()
+sequelize.sync()
 
 module.exports = sequelize
