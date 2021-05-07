@@ -4,7 +4,7 @@ var Docxtemplater = require('docxtemplater');
 var fs = require('fs');
 var path = require('path');
 
-const loadResearchWork = (userName,inputText) => {
+const loadDocument = (fileName, inputData, userEmail) => {
     function replaceErrors(key, value) {
         if (value instanceof Error) {
             return Object.getOwnPropertyNames(value).reduce(function(error, key) {
@@ -31,7 +31,7 @@ const loadResearchWork = (userName,inputText) => {
 
 //Load the docx file as a binary
     var content = fs
-        .readFileSync(path.resolve('./FileTemplates/', 'input.docx'), 'binary');
+        .readFileSync(path.resolve('./FileTemplates/', `${fileName}.docx`), 'binary');
 
     var zip = new PizZip(content);
     var doc;
@@ -42,11 +42,35 @@ const loadResearchWork = (userName,inputText) => {
         errorHandler(error);
     }
 
-//set the templateVariables
-    doc.setData({
-        name: userName,
-        text: inputText
-    });
+    switch (fileName) {
+        case 'researchwork' : {
+            doc.setData({
+                name: inputData.name,
+                text: inputData.text
+            });
+            break
+        }
+        case 'declaration': {
+            doc.setData({
+                name: inputData.name,
+                surname: inputData.surname,
+                nationality: inputData.nationality,
+                passportId: inputData.passportId,
+                birthday: inputData.birthday,
+                gender: inputData.gender,
+                schoolGraduateDate: inputData.schoolGraduateDate,
+                address: inputData.address,
+                phoneNumber: inputData.phoneNumber,
+                email: inputData.email,
+                language: inputData.language
+            });
+            break
+        }
+        defaulf:{
+            throw new Error('Щось пішло не так!')
+            break
+        }
+    }
 
     try {
         doc.render()
@@ -58,7 +82,7 @@ const loadResearchWork = (userName,inputText) => {
     var buf = doc.getZip()
         .generate({type: 'nodebuffer'});
 
-    fs.writeFileSync(path.resolve('./CompletedFiles/', 'output.docx'), buf);
+    fs.writeFileSync(path.resolve('./CompletedFiles/', `${fileName}_${userEmail}.docx`), buf);
 }
 
-module.exports = loadResearchWork
+module.exports = loadDocument

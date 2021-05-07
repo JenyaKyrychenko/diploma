@@ -1,5 +1,5 @@
 import React,{useState, useEffect, useCallback, useContext} from 'react'
-import {Sidebar} from "../../components/Sidebar";
+import {StudentSidebar} from "../../components/StudentSidebar";
 import {Footer} from "../../components/Footer";
 import {Topbar} from "../../components/Topbar";
 import {Profile} from "../../components/Profile";
@@ -31,7 +31,7 @@ export const StudentProfilePage = () => {
 
     return (
         <div id='wrapper'>
-            <Sidebar/>
+            <StudentSidebar/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <Topbar userData={userData}/>

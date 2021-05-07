@@ -11,6 +11,9 @@ import {DepHeadCreateFormPage} from "./pages/departmentHeadPages/DepHeadCreateFo
 import {PgHeadHomePage} from "./pages/pgHeadPages/PgHeadHomePage";
 import {PgHeadCreateFormPage} from "./pages/pgHeadPages/PgHeadCreateFormPage";
 import {StudentProfilePage} from "./pages/studentPages/StudentProfilePage";
+import {StudentChooseSpeciality} from "./pages/studentPages/StudentChooseSpeciality";
+import {StudentResearchWork} from "./pages/studentPages/StudentResearchWork";
+import {StudentExams} from "./pages/studentPages/StudentExams";
 
 export const useRoutes = (isAuthenticated, userStatus) => {
     if(isAuthenticated && userStatus){
@@ -25,6 +28,15 @@ export const useRoutes = (isAuthenticated, userStatus) => {
                     </Route>
                     <Route path="/student/profile" exact>
                         <StudentProfilePage/>
+                    </Route>
+                    <Route path="/student/speciality" exact>
+                        <StudentChooseSpeciality/>
+                    </Route>
+                    <Route path="/student/researchwork" exact>
+                        <StudentResearchWork/>
+                    </Route>
+                    <Route path="/student/exams" exact>
+                        <StudentExams/>
                     </Route>
                     <Redirect to="/student/home"/>
                 </Switch>

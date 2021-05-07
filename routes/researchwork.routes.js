@@ -3,7 +3,7 @@ const User = require('./../models/User')
 const ResearchWork = require('./../models/ResearchWork')
 const router = Router()
 const bodyParser = require('body-parser')
-const loadResearchWork = require('./../fileTemplater')
+const loadDocument = require('../FileTemplater')
 
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -21,7 +21,7 @@ router.post('/user/:id/add', async (req, res) => {
         }
         const user = await User.findOne({where:{id},include:ResearchWork})
         user.addResearchWork(researchWork)
-        loadResearchWork(user.firstName, text)
+        loadDocument('researchwork', {name:user.firstName, text}, user.email)
         res.json('Ok!')
     } catch (e) {
         res.status(500).json({message: 'Щось пішло не так!'})

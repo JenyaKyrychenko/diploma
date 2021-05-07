@@ -1,30 +1,42 @@
-import React, {useContext, useState, useCallback, useEffect} from 'react'
+import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {StudentSidebar} from "../../components/StudentSidebar";
-import {Topbar} from "../../components/Topbar";
 import {Footer} from "../../components/Footer";
+import {Topbar} from "../../components/Topbar";
+import {ChooseSpeciality} from "../../components/StudentsComponents/ChooseSpeciality";
 import {AuthContext} from "../../context/AuthContext";
 import {useHttp} from "../../hooks/http.hook";
 import {Loader} from "../../components/Loader";
-import CreateDeclaration from "../../components/StudentsComponents/CreateDeclaration";
 
-export const StudentCreateFormPage = () => {
+export const StudentChooseSpeciality = () => {
     const {userId} = useContext(AuthContext)
     const {request, loading} = useHttp()
     const [userData, setUserData] = useState(null)
+    const [specialitys, setSpecialitys] = useState(null)
 
-    const getName = useCallback(async () => {
+    const getName = useCallback(async ()=>{
         try {
             const data = await request(`/api/auth/users/${userId}`, 'GET')
             setUserData(data)
-        } catch (e) {
+        }catch (e) {
         }
     }, [userId, request])
 
-    useEffect(() => {
-        getName()
-    }, [getName])
+    const getSpeciality = useCallback(async () => {
+        try {
+            const specialitysData = await request('/api/speciality/', 'GET')
+            setSpecialitys(specialitysData)
+        } catch (e) {
+            console.log(e)
+        }
+    }, [request])
 
-    if (loading) {
+
+    useEffect(()=>{
+        getName()
+        getSpeciality()
+    },[getName, getSpeciality])
+
+    if(loading){
         return <Loader/>
     }
 
@@ -34,7 +46,7 @@ export const StudentCreateFormPage = () => {
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <Topbar userData={userData}/>
-                    <CreateDeclaration/>
+                    <ChooseSpeciality specialitys={specialitys}/>
                 </div>
                 <Footer/>
             </div>

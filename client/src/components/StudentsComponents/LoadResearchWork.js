@@ -15,6 +15,10 @@ export const LoadResearchWork = () => {
     }
 
     const loadWork = async () =>{
+        if(!text){
+            alert('Введіть текст!')
+            return
+        }
         try {
             const res = await request(`/api/researchwork/user/${userId}/add`,'POST',{text})
             message(res)

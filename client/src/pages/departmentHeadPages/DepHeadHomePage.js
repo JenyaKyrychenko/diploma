@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import {AuthContext} from "../../context/AuthContext";
 import {useHttp} from "../../hooks/http.hook";
-import {Sidebar} from "../../components/Sidebar";
+import {StudentSidebar} from "../../components/StudentSidebar";
 import {Topbar} from "../../components/Topbar";
 import {Footer} from "../../components/Footer";
 
@@ -20,7 +20,7 @@ export const DepHeadHomePage = () =>{
     }
     return (
         <div id='wrapper'>
-            <Sidebar/>
+            <StudentSidebar/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <Topbar/>
