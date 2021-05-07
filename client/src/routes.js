@@ -14,6 +14,8 @@ import {StudentProfilePage} from "./pages/studentPages/StudentProfilePage";
 import {StudentChooseSpeciality} from "./pages/studentPages/StudentChooseSpeciality";
 import {StudentResearchWork} from "./pages/studentPages/StudentResearchWork";
 import {StudentExams} from "./pages/studentPages/StudentExams";
+import {MentorsStudents} from "./pages/mentorPages/MentorsStudents";
+import {MentorMentoring} from "./pages/mentorPages/MentorMentoring";
 
 export const useRoutes = (isAuthenticated, userStatus) => {
     if(isAuthenticated && userStatus){
@@ -50,6 +52,12 @@ export const useRoutes = (isAuthenticated, userStatus) => {
                     </Route>
                     <Route path="/mentor/createform" exact>
                         <MentorCreateFormPage/>
+                    </Route>
+                    <Route path="/mentor/students" exact>
+                        <MentorsStudents/>
+                    </Route>
+                    <Route path="/mentor/confirm" exact>
+                        <MentorMentoring/>
                     </Route>
                     <Redirect to="/mentor/home"/>
                 </Switch>

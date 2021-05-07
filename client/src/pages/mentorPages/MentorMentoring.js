@@ -5,11 +5,13 @@ import {Topbar} from "../../components/Topbar";
 import {Footer} from "../../components/Footer";
 import {Loader} from "../../components/Loader";
 import {MentorSidebar} from "../../components/MentorSidebar";
+import {RegisterAsMentor} from "../../components/MentorsComponents.js/RegisterAsMentor";
 
-export const MentorHomePage = () =>{
+export const MentorMentoring = () =>{
     const {userId} = useContext(AuthContext)
     const {request, loading} = useHttp()
     const [userData, setUserData] = useState(null)
+    const [specialitys, setSpecialitys] = useState(null)
 
     const getName = useCallback(async ()=>{
         try {
@@ -19,9 +21,19 @@ export const MentorHomePage = () =>{
         }
     }, [userId, request])
 
+    const getSpeciality = useCallback(async () => {
+        try {
+            const specialitysData = await request('/api/speciality/', 'GET')
+            setSpecialitys(specialitysData)
+        } catch (e) {
+            console.log(e)
+        }
+    }, [request])
+
     useEffect(()=>{
         getName()
-    },[getName])
+        getSpeciality()
+    },[getName, getSpeciality])
 
     useEffect(()=>{
         if(loading){
@@ -35,6 +47,7 @@ export const MentorHomePage = () =>{
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <Topbar userData={userData}/>
+                    <RegisterAsMentor specialitys={specialitys} userData={userData}/>
                 </div>
                 <Footer/>
             </div>

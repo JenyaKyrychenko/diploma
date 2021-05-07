@@ -46,15 +46,15 @@ router.get('/:id/users', async (req, res) => {
     }
 })
 
-// POST mentor to speciality
-router.post('/mentor/:mentorId/add', async (req, res) => {
+// POST mentor to speciality by SpecialityCode
+router.post('/:code/mentor/add', async (req, res) => {
     try {
-        const specialityId = req.body.specialityId
-        const mentorId = req.params.mentorId
-        const speciality = await Speciality.findOne({where:{id:specialityId},include:Mentor})
-        const mentor = await Mentor.findOne({where:{id:mentorId},include:Speciality})
+        const specialityCode = req.params.code
+        const mentorEmail = req.body.email
+        const speciality = await Speciality.findOne({where:{specialityCode},include:Mentor})
+        const mentor = await Mentor.findOne({where:{email:mentorEmail},include:Speciality})
         mentor.addSpeciality(speciality)
-        res.json({message:'Спеціальність обрана!'})
+        res.json('Спеціальність обрана!')
     } catch (e) {
         res.status(500).json({message: 'Щось пішло не так!'})
         console.log(e)

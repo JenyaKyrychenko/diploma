@@ -1,10 +1,17 @@
-import React from 'react'
+import React,{useEffect} from 'react'
+import {Loader} from "../Loader";
 
-export const ShowExams = ({speciality, exams}) =>{
+export const ShowExams = ({speciality, exams, loading}) =>{
+    useEffect(()=>{
+        if(loading){
+            return <Loader/>
+        }
+    })
 
     if(!exams || !speciality){
         return <div className="container-fluid declarationContainer"><h3>Іспитів для вашої спеціальності на данний момент немає</h3></div>
     }
+
     return (
         <div className="card-body">
             <div className="table-responsive">
@@ -21,7 +28,7 @@ export const ShowExams = ({speciality, exams}) =>{
                     <tbody>
                         {exams ? exams.map((e,index)=>{
                             return <tr key={index}>
-                                <td>{e.id}</td>
+                                <td>{index + 1}</td>
                                 <td>{new Date(e.examDate).toLocaleDateString()}</td>
                                 <td>{e.examAddress}</td>
                                 <td>{e.subjectExam}</td>

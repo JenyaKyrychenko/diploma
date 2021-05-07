@@ -25,9 +25,11 @@ export const StudentResearchWork = () => {
         getName()
     },[getName])
 
-    if(loading){
-        return <Loader/>
-    }
+    useEffect(()=>{
+        if(loading){
+            return <Loader/>
+        }
+    })
 
     return (
         <div id='wrapper'>

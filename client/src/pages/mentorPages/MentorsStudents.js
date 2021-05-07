@@ -1,48 +1,33 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react'
-import {StudentSidebar} from "../../components/StudentSidebar";
 import {Footer} from "../../components/Footer";
 import {Topbar} from "../../components/Topbar";
 import {AuthContext} from "../../context/AuthContext";
 import {useHttp} from "../../hooks/http.hook";
 import {Loader} from "../../components/Loader";
-import {ShowExams} from "../../components/StudentsComponents/ShowExams";
+import {ShowStudents} from "../../components/MentorsComponents.js/ShowStudents";
+import {MentorSidebar} from "../../components/MentorSidebar";
 
-export const StudentExams = () => {
+export const MentorsStudents = () => {
     const {userId} = useContext(AuthContext)
     const {request, loading} = useHttp()
     const [userData, setUserData] = useState(null)
-    const [exams, setExams] = useState()
-    const [specialityId, setSpecialityId] = useState(null)
-    const [speciality, setSpeciality] = useState(null)
+    const [students, setStudents] = useState(null)
 
     const getName = useCallback(async () => {
         try {
             const data = await request(`/api/auth/users/${userId}`, 'GET')
-            setSpecialityId(data.specialityId)
+            const students = await request(`/api/mentor/students`, 'POST',{email:data.email})
+            if(students.length > 0){
+                setStudents(students)
+            }
             setUserData(data)
         } catch (e) {
         }
     }, [userId, request])
 
-    const getExams = useCallback(async () => {
-        try {
-            if (specialityId) {
-                const data = await request(`/api/exam/${specialityId}`, 'GET')
-                setExams(data.exams)
-                setSpeciality(data.speciality)
-            }
-        } catch (e) {
-        }
-    }, [specialityId, request])
-
-
     useEffect(() => {
         getName()
     }, [getName])
-
-    useEffect(() => {
-        getExams()
-    }, [getExams])
 
     if (loading) {
         return <Loader/>
@@ -50,11 +35,11 @@ export const StudentExams = () => {
 
     return (
         <div id='wrapper'>
-            <StudentSidebar/>
+            <MentorSidebar/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <Topbar userData={userData}/>
-                    <ShowExams speciality={speciality} exams={exams} loading={loading}/>
+                    <ShowStudents students={students}loading={loading}/>
                 </div>
                 <Footer/>
             </div>

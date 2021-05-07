@@ -139,3 +139,18 @@ body {
 .red-color{
   color:red;
 }
+
+.loader-container{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.buttonConfirmPage{
+  margin-top: 20px;
+}
+
+.checkbox{
+  margin-left: 20px;
+}

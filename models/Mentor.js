@@ -25,6 +25,12 @@ const Mentor = sequelize.define("mentor", {
         type: Sequelize.STRING,
         required: true,
         allowNull: false
+    },
+    email: {
+        type: Sequelize.STRING,
+        unique: true,
+        required: true,
+        allowNull: false
     }
 }, {
     charset: 'utf8',

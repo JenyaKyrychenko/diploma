@@ -65,10 +65,10 @@ const CreateDeclaration = () => {
 
     const validateField = () => {
         let nameValid = name.length < 25 && name.match("[А-ЯA-ZЇІ][А-Яа-яA-Za-z' -іїІЇ]");
-        formErrors.name = nameValid ? '' : "Ім'я повинно бути введене з великої букви![2-25]";
+        formErrors.name = nameValid ? '' : "Ім'я повинно починатися з великої букви![2-25]";
 
         let surnameValid = surname.length < 25 && surname.match("[А-ЯA-ZІЇ][А-Яа-яA-Za-z' -іїІЇ]+");
-        formErrors.surname = surnameValid ? '' : "Фамілія повинна бути введене з великої букви![2-25]";
+        formErrors.surname = surnameValid ? '' : "Прізвище повинно починатися з великої букви![2-25]";
 
         let nationalityValid = nationality.length < 30 && nationality.match("[А-Яа-яA-Za-z' -іїІЇ]+");
         formErrors.nationality = nationalityValid ? '' : "Максимальна довжина 30 символів(Громадянство)";
@@ -100,7 +100,7 @@ const CreateDeclaration = () => {
                 return
             }
         }
-        if(!birthday || !language && language !== 'Мова' || !school || !gender && gender !== 'Стать'){
+        if(!birthday || !language  || !school || !gender){
             alert('Заповніть всі поля!')
             return
         }
@@ -110,10 +110,6 @@ const CreateDeclaration = () => {
         })
         message(res)
 
-    }
-
-    if (!formErrors) {
-        console.log('OK!')
     }
 
 
@@ -131,7 +127,7 @@ const CreateDeclaration = () => {
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="exampleInputSurname" className="form-label">Фамілія:</label>
+                    <label htmlFor="exampleInputSurname" className="form-label">Прізвище:</label>
                     <input onChange={changeSurname} value={surname} type="text"
                            className={`form-control ${formErrors.surname ? 'has-error' : 'validated'}`}
                            id="exampleInputSurname"/>

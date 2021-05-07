@@ -2,8 +2,10 @@ import React from 'react'
 
 export const Loader = () => {
     return (
-        <div style={{display:'flex', justifyContent: 'center',alignItems:'center', paddingTop:'2 rem'}}>
-            <div>Loading...</div>
+        <div className='loader-container'>
+            <div className="spinner-border" role="status" style={{position: 'absolute', top: '50%', left: '50%'}}>
+                <span className="visually-hidden">Loading...</span>
+            </div>
         </div>
 
     )

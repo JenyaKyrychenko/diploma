@@ -8,6 +8,7 @@ app.use('/api/speciality', require('./routes/speciality.routes'))
 app.use('/api/researchwork', require('./routes/researchwork.routes'))
 app.use('/api/declaration', require('./routes/declaration.routes'))
 app.use('/api/exam', require('./routes/exam.routes'))
+app.use('/api/mentor', require('./routes/mentor.routes'))
 
 const PORT = config.get('port') || 5000
 

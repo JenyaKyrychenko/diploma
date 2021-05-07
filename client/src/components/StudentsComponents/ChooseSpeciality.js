@@ -1,8 +1,7 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {useHttp} from "../../hooks/http.hook";
 import {AuthContext} from "../../context/AuthContext";
 import {useMessage} from "../../hooks/message.hook";
-import {Loader} from "../Loader";
 
 export const ChooseSpeciality = ({specialitys}) => {
     const message = useMessage()
@@ -25,12 +24,12 @@ export const ChooseSpeciality = ({specialitys}) => {
     }
 
     if(!specialitys){
-        return <Loader/>
+        return ''
     }
 
     return (
         <div className="container-fluid">
-            <form name='specialityChoose' className="row g-3 needs-validation" noValidate onSubmit={()=>alert('Hello')}>
+            <form name='specialityChoose' className="row g-3 needs-validation" noValidate>
                 <div className="col-md-3">
                     <label htmlFor="validationCustom04" className="form-label">Спеціальність:</label>
                     <select onClick={handleChange} className="form-select" id="validationCustom04">
