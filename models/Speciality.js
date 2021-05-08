@@ -14,7 +14,22 @@ const Speciality = sequelize.define("speciality", {
         type: Sequelize.INTEGER,
         required: true,
         allowNull: false
-    }
+    },
+    specialityName: {
+        type: Sequelize.STRING,
+        required: true,
+        allowNull: false
+    },
+    industryCode: {
+        type: Sequelize.INTEGER,
+        required: true,
+        allowNull: false
+    },
+    industryName: {
+        type: Sequelize.STRING,
+        required: true,
+        allowNull: false
+    },
 }, {
     charset: 'utf8',
     collate: 'utf8_general_ci',

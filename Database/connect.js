@@ -12,7 +12,7 @@ const sequelize = new Sequelize('test_sequelize', 'root', 'root', {
 
 const connect= async ()=>{
     try {
-        // sequelize.sync()
+        // sequelize.sync({alter:true})
     }catch (e) {
         console.log('Error: '+e)
     }

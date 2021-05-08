@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react'
-import {StudentSidebar} from "../../components/StudentSidebar";
+import {StudentSidebar} from "../../components/StudentsComponents/StudentSidebar";
 import {Footer} from "../../components/Footer";
 import {Topbar} from "../../components/Topbar";
 import {ChooseSpeciality} from "../../components/StudentsComponents/ChooseSpeciality";
@@ -29,7 +29,6 @@ export const StudentChooseSpeciality = () => {
             console.log(e)
         }
     }, [request])
-
 
     useEffect(()=>{
         getName()

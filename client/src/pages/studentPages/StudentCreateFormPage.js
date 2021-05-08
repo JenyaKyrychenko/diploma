@@ -1,5 +1,5 @@
 import React, {useContext, useState, useCallback, useEffect} from 'react'
-import {StudentSidebar} from "../../components/StudentSidebar";
+import {StudentSidebar} from "../../components/StudentsComponents/StudentSidebar";
 import {Topbar} from "../../components/Topbar";
 import {Footer} from "../../components/Footer";
 import {AuthContext} from "../../context/AuthContext";

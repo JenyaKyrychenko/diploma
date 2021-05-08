@@ -61,9 +61,9 @@ export const RegisterAsMentor = ({specialitys, userData}) => {
         validateField()
     })
 
-    const registerAsMentor = async (e) => {
-        e.preventDefault()
-        for (e in formErrors) {
+    const registerAsMentor = async (event) => {
+        event.preventDefault()
+        for (let e in formErrors) {
             if (formErrors[e]) {
                 alert(formErrors[e])
                 return
@@ -90,8 +90,8 @@ export const RegisterAsMentor = ({specialitys, userData}) => {
     }
 
     return (
-
         <div className="container-fluid declarationContainer">
+            <h2>Реєстрація научним керівником</h2>
             <form>
                 <div className="mb-3">
                     <label htmlFor="exampleInputName" className="form-label">Ім'я:</label>

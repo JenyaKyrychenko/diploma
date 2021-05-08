@@ -4,8 +4,8 @@ import {useHttp} from "../../hooks/http.hook";
 import {Topbar} from "../../components/Topbar";
 import {Footer} from "../../components/Footer";
 import {Loader} from "../../components/Loader";
-import {MentorSidebar} from "../../components/MentorSidebar";
-import {RegisterAsMentor} from "../../components/MentorsComponents.js/RegisterAsMentor";
+import {MentorSidebar} from "../../components/MentorsComponents/MentorSidebar";
+import {RegisterAsMentor} from "../../components/MentorsComponents/RegisterAsMentor";
 
 export const MentorMentoring = () =>{
     const {userId} = useContext(AuthContext)

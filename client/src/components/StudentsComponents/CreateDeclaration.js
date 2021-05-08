@@ -96,7 +96,7 @@ const CreateDeclaration = () => {
         e.preventDefault()
         for (e in formErrors) {
             if (formErrors[e]) {
-                console.log(formErrors[e])
+                message(formErrors[e])
                 return
             }
         }
@@ -155,7 +155,7 @@ const CreateDeclaration = () => {
                 <div className="mb-3">
                     <label htmlFor="exampleInputPassport" className="form-label">Стать:</label>
                     <select onChange={changeGender} value={gender} className='form-select' id="validationCustom04">
-                        <option>Стать</option>
+                        <option value=''>Стать</option>
                         <option>Чоловіча</option>
                         <option>Жіноча</option>
                     </select>
@@ -192,13 +192,13 @@ const CreateDeclaration = () => {
                 <div className="mb-3">
                     <label htmlFor="exampleInputLanguage" className="form-label">Мова навчання:</label>
                     <select onChange={changeLanguage} value={language} className="form-select" id="validationCustom04">
-                        <option>Мова</option>
+                        <option value=''>Мова</option>
                         <option>Українська</option>
                         <option>Російська</option>
                         <option>Англійська</option>
                     </select>
                 </div>
-                <button onClick={loadDeclaration} type="submit" className="btn btn-primary">Відправити</button>
+                <button onClick={loadDeclaration} type="submit" className="btn btn-primary buttonSubmit">Відправити</button>
             </form>
         </div>
     )

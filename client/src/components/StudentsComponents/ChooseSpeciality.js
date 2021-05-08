@@ -11,9 +11,13 @@ export const ChooseSpeciality = ({specialitys}) => {
 
     const specialityChoose = async (e) => {
         e.preventDefault()
+        if(chosenSpeciality === ''){
+            message('Оберіть спеціальність')
+            return
+        }
         try {
             const res = await request(`/api/speciality/users/${userId}/add`, 'POST', {specialityCode: chosenSpeciality})
-            message(res)
+            message(res.message)
         } catch (e) {
             console.log(e)
         }
@@ -33,17 +37,15 @@ export const ChooseSpeciality = ({specialitys}) => {
                 <div className="col-md-3">
                     <label htmlFor="validationCustom04" className="form-label">Спеціальність:</label>
                     <select onClick={handleChange} className="form-select" id="validationCustom04">
-                        <option>Спеціальність</option>
+                        <option value=''>Спеціальність</option>
                         {specialitys.map((s,index) => {
                             return <option key={index}>{s.specialityCode}</option>
                         })}
                     </select>
                 </div>
-                <div>
-                    <button type='submit' onClick={specialityChoose} className="btn btn-success btn-icon-split">
-                        <span className="text">Обрати</span>
-                    </button>
-                </div>
+                    <div className='buttonConfirmPage'>
+                        <button onClick={specialityChoose} type="submit" className="btn btn-primary buttonSubmit">Підтвердити</button>
+                    </div>
             </form>
         </div>
 

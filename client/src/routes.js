@@ -5,17 +5,17 @@ import {StudentHomePage} from "./pages/studentPages/StudentHomePage";
 import {LoginPage} from "./pages/authorizationPages/LoginPage";
 import {RegistrationPage} from "./pages/authorizationPages/RegistrationPage";
 import {MentorHomePage} from "./pages/mentorPages/MentorHomePage";
-import {MentorCreateFormPage} from "./pages/mentorPages/MentorCreateFormPage";
 import {DepHeadHomePage} from "./pages/departmentHeadPages/DepHeadHomePage";
-import {DepHeadCreateFormPage} from "./pages/departmentHeadPages/DepHeadCreateFormPage";
 import {PgHeadHomePage} from "./pages/pgHeadPages/PgHeadHomePage";
-import {PgHeadCreateFormPage} from "./pages/pgHeadPages/PgHeadCreateFormPage";
 import {StudentProfilePage} from "./pages/studentPages/StudentProfilePage";
 import {StudentChooseSpeciality} from "./pages/studentPages/StudentChooseSpeciality";
 import {StudentResearchWork} from "./pages/studentPages/StudentResearchWork";
 import {StudentExams} from "./pages/studentPages/StudentExams";
 import {MentorsStudents} from "./pages/mentorPages/MentorsStudents";
 import {MentorMentoring} from "./pages/mentorPages/MentorMentoring";
+import {DepHeadAddSpeciality} from "./pages/departmentHeadPages/DepHeadAddSpeciality";
+import {PgHeadAddExam} from "./pages/pgHeadPages/PgHeadAddExam";
+import {PgHeadShowStudents} from "./pages/pgHeadPages/PgHeadShowStudents";
 
 export const useRoutes = (isAuthenticated, userStatus) => {
     if(isAuthenticated && userStatus){
@@ -50,9 +50,6 @@ export const useRoutes = (isAuthenticated, userStatus) => {
                     <Route path="/mentor/home" exact>
                         <MentorHomePage/>
                     </Route>
-                    <Route path="/mentor/createform" exact>
-                        <MentorCreateFormPage/>
-                    </Route>
                     <Route path="/mentor/students" exact>
                         <MentorsStudents/>
                     </Route>
@@ -69,8 +66,8 @@ export const useRoutes = (isAuthenticated, userStatus) => {
                     <Route path="/dephead/home" exact>
                         <DepHeadHomePage/>
                     </Route>
-                    <Route path="/dephead/createform" exact>
-                        <DepHeadCreateFormPage/>
+                    <Route path="/dephead/speciality/add" exact>
+                        <DepHeadAddSpeciality/>
                     </Route>
                     <Redirect to="/dephead/home"/>
                 </Switch>
@@ -82,8 +79,11 @@ export const useRoutes = (isAuthenticated, userStatus) => {
                     <Route path="/pghead/home" exact>
                         <PgHeadHomePage/>
                     </Route>
-                    <Route path="/pghead/createform" exact>
-                        <PgHeadCreateFormPage/>
+                    <Route path="/pghead/exam/add" exact>
+                        <PgHeadAddExam/>
+                    </Route>
+                    <Route path="/pghead/students" exact>
+                        <PgHeadShowStudents/>
                     </Route>
                     <Redirect to="/pghead/home"/>
                 </Switch>

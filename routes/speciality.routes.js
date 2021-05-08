@@ -26,8 +26,11 @@ router.post('/users/:id/add', async (req, res) => {
         const id = req.params.id
         const user = await User.findOne({where:{id},include:Speciality})
         const speciality = await Speciality.findOne({where:{specialityCode},include:User})
+        if(user.specialityId === speciality.id){
+            return res.json({message:'Ви вже обрали цю спеціальність!'})
+        }
         await speciality.addUser(user)
-        res.json('Спеціальність обрана!')
+        res.json({message:`Ви обрали спеціальність ${speciality.specialityCode}`})
     } catch (e) {
         res.status(500).json({message: 'Щось пішло не так!'})
         console.log(e)
@@ -61,12 +64,43 @@ router.post('/:code/mentor/add', async (req, res) => {
     }
 })
 
+// DELETE speciality by ID
+router.delete('/:id/delete', async (req, res) => {
+    try {
+        const specialityId = req.params.id
+        const speciality = await Speciality.destroy({where:{id:specialityId}})
+        res.json({message:'Спеціальність видалена!',speciality})
+    } catch (e) {
+        res.status(500).json({message: 'Щось пішло не так!'})
+        console.log(e)
+    }
+})
+
 // GET mentors list on speciality
 router.get('/:id/mentors', async (req, res) => {
     try {
         const id = req.params.id
         const speciality = await Speciality.findOne({where:{id},include:Mentor})
         res.json(speciality.mentors)
+    } catch (e) {
+        res.status(500).json({message: 'Щось пішло не так!'})
+        console.log(e)
+    }
+})
+
+// Create speciality
+router.post('/create', async (req, res) => {
+    try {
+        const industryCode = req.body.industryCode
+        const industryName = req.body.industryName
+        const specialityCode = req.body.specialityCode
+        const specialityName = req.body.specialityName
+        const exists = await Speciality.findOne({where:{specialityCode}})
+        if(exists){
+            return res.json({message:'Така спеціальність уже існує!',exists:true})
+        }
+        await Speciality.create({industryCode, industryName, specialityCode, specialityName})
+        res.json({message:'Спеціальність додана!',exists:false})
     } catch (e) {
         res.status(500).json({message: 'Щось пішло не так!'})
         console.log(e)
