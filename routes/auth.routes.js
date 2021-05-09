@@ -4,6 +4,7 @@ const config = require('config')
 const jwt = require('jsonwebtoken')
 const {check, validationResult} = require('express-validator')
 const User = require('./../models/User')
+const Speciality = require('./../models/Speciality')
 const router = Router()
 const bodyParser = require('body-parser')
 
@@ -95,6 +96,7 @@ router.post('/login',
         }
     })
 
+// GET all users
 router.get('/users', async (req, res) => {
     try {
         const users = await User.findAll()
@@ -109,7 +111,7 @@ router.get('/users', async (req, res) => {
 router.get('/users/:id', async (req, res) => {
     try {
         const id = req.params.id
-        const user = await User.findOne({where:{id}})
+        const user = await User.findOne({where:{id},include:Speciality})
         res.json(user)
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так!'})

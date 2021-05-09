@@ -13,6 +13,8 @@ export const ShowExams = ({speciality, exams, loading}) => {
             момент немає</h3></div>
     }
 
+    let indexEnglish = 0 , indexSpec = 0, indexAdd = 0
+
     return (
 
         /*English exams*/
@@ -33,10 +35,11 @@ export const ShowExams = ({speciality, exams, loading}) => {
                             </tr>
                             </thead>
                             <tbody>
-                            {exams ? exams.map((e, index) => {
+                            {exams ? exams.map((e) => {
                                 if (e.subjectExam === 'english') {
-                                    return <tr key={index}>
-                                        <td>{index + 1}</td>
+                                    indexEnglish++
+                                    return <tr key={indexEnglish}>
+                                        <td>{indexEnglish}</td>
                                         <td>{new Date(e.examDate).toLocaleDateString()}</td>
                                         <td>{e.examAddress}</td>
                                         <td>{speciality.specialityCode}</td>
@@ -68,10 +71,11 @@ export const ShowExams = ({speciality, exams, loading}) => {
                             </tr>
                             </thead>
                             <tbody>
-                            {exams ? exams.map((e, index) => {
+                            {exams ? exams.map((e) => {
                                 if (e.subjectExam === 'speciality') {
-                                    return <tr key={index}>
-                                        <td>{index + 1}</td>
+                                    indexSpec++
+                                    return <tr key={indexSpec}>
+                                        <td>{indexSpec}</td>
                                         <td>{new Date(e.examDate).toLocaleDateString()}</td>
                                         <td>{e.examAddress}</td>
                                         <td>{speciality.specialityCode}</td>
@@ -103,10 +107,11 @@ export const ShowExams = ({speciality, exams, loading}) => {
                             </tr>
                             </thead>
                             <tbody>
-                            {exams ? exams.map((e, index) => {
+                            {exams ? exams.map((e) => {
                                 if (e.subjectExam === 'additional') {
-                                    return <tr key={index}>
-                                        <td>{index + 1}</td>
+                                    indexAdd++
+                                    return <tr key={indexAdd}>
+                                        <td>{indexAdd}</td>
                                         <td>{new Date(e.examDate).toLocaleDateString()}</td>
                                         <td>{e.examAddress}</td>
                                         <td>{speciality.specialityCode}</td>

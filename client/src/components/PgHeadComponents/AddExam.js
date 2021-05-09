@@ -12,7 +12,6 @@ export const AddExam = ({specialitys}) => {
     const [specialityId, setSpecialityId] = useState('')
     const [examDate, setExamDate] = useState('')
     const [examAddress, setExamAddress] = useState('')
-    const [reset, setReset] = useState(null)
 
     const [formErrors, setFormErrors] = useState({specialityId: '', subject: '', examDate: '', examAddress: ''})
 
@@ -58,8 +57,6 @@ export const AddExam = ({specialitys}) => {
         try {
             const res = await request('/api/exam/create','POST',{subject,specialityId, examDate, examAddress})
             message(res.message)
-            console.log(reset)
-            setReset('Hello')
         }catch (e) {
             console.log(e)
         }

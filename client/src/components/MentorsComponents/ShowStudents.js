@@ -2,7 +2,6 @@ import React, {useEffect} from 'react'
 import {Loader} from "../Loader";
 
 export const ShowStudents = ({students, loading, specialitys}) => {
-
     useEffect(() => {
         if (!loading) {
             return <Loader/>

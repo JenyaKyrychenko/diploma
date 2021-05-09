@@ -4,6 +4,8 @@ const ResearchWork = require('./../models/ResearchWork')
 const router = Router()
 const bodyParser = require('body-parser')
 const loadDocument = require('../FileTemplater')
+const fs = require('fs')
+const path = require('path')
 
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -28,6 +30,17 @@ router.post('/user/:id/add', async (req, res) => {
         console.log(e)
     }
 })
+
+// router.get('/:id', async (req, res) => {
+//     try {
+//         const id = req.params.id
+//         const fdf = req.files.file
+//         const file = await loadDocument('researchwork', {name:'hello', id}, 'email')
+//     } catch (e) {
+//         res.status(500).json({message: 'Щось пішло не так!'})
+//         console.log(e)
+//     }
+// })
 
 
 module.exports = router

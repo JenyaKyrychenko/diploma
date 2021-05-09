@@ -16,6 +16,7 @@ import {MentorMentoring} from "./pages/mentorPages/MentorMentoring";
 import {DepHeadAddSpeciality} from "./pages/departmentHeadPages/DepHeadAddSpeciality";
 import {PgHeadAddExam} from "./pages/pgHeadPages/PgHeadAddExam";
 import {PgHeadShowStudents} from "./pages/pgHeadPages/PgHeadShowStudents";
+import {StudentExamResults} from "./pages/studentPages/StudentExamResults";
 
 export const useRoutes = (isAuthenticated, userStatus) => {
     if(isAuthenticated && userStatus){
@@ -39,6 +40,9 @@ export const useRoutes = (isAuthenticated, userStatus) => {
                     </Route>
                     <Route path="/student/exams" exact>
                         <StudentExams/>
+                    </Route>
+                    <Route path="/student/exam/results" exact>
+                        <StudentExamResults/>
                     </Route>
                     <Redirect to="/student/home"/>
                 </Switch>

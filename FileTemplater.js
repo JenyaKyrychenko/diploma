@@ -83,6 +83,7 @@ const loadDocument = (fileName, inputData, userEmail) => {
         .generate({type: 'nodebuffer'});
 
     fs.writeFileSync(path.resolve('./CompletedFiles/', `${fileName}_${userEmail}.docx`), buf);
+    // return buf
 }
 
 module.exports = loadDocument
