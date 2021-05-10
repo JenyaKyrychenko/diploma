@@ -42,35 +42,27 @@ export const LoginPage = () => {
                                 <div className="col-lg-6">
                                     <div className="p-5">
                                         <div className="text-center">
-                                            <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                            <h1 className="h4 text-gray-900 mb-4">Вступ до аспірантури</h1>
                                         </div>
                                         <form className="user">
                                             <div className="form-group">
                                                 <input type="email" className="form-control form-control-user"
-                                                       id="email" placeholder="Enter Email Address..." name='email' value={form.email} onChange={changeHandler}/>
+                                                       id="email" placeholder="Введіть свій email..." name='email' value={form.email} onChange={changeHandler}/>
                                             </div>
                                             <div className="form-group">
                                                 <input type="password" className="form-control form-control-user"
-                                                       id="password" placeholder="Password" name='password' value={form.password} onChange={changeHandler}/>
-                                            </div>
-                                            <div className="form-group">
-                                                <div className="custom-control custom-checkbox small">
-                                                    <input type="checkbox" className="custom-control-input"
-                                                           id="customCheck"/>
-                                                    <label className="custom-control-label" htmlFor="customCheck">Remember
-                                                        Me</label>
-                                                </div>
+                                                       id="password" placeholder="Пароль" name='password' value={form.password} onChange={changeHandler}/>
                                             </div>
                                             <button className="btn btn-primary btn-user btn-block" onClick={loginHandler} disabled={loading}>
-                                                Login
+                                                Вхід
                                             </button>
                                         </form>
                                         <hr/>
+                                        {/*<div className="text-center">*/}
+                                            {/*<NavLink className="small" to='#'>Forgot Password?</NavLink>*/}
+                                        {/*</div>*/}
                                         <div className="text-center">
-                                            <NavLink className="small" to='#'>Forgot Password?</NavLink>
-                                        </div>
-                                        <div className="text-center">
-                                            <NavLink className="small" to='/registration' >Create an Account!</NavLink>
+                                            <NavLink className="small" to='/registration' >Зареєструвати аккаунт</NavLink>
                                         </div>
                                     </div>
                                 </div>

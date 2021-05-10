@@ -4,10 +4,10 @@ import {Topbar} from "../../components/Topbar";
 import {AuthContext} from "../../context/AuthContext";
 import {useHttp} from "../../hooks/http.hook";
 import {Loader} from "../../components/Loader";
-import {PgHeadSidebar} from "../../components/PgHeadComponents/PgHeadSidebar";
 import {ShowStudentsExamResults} from "../../components/ShowStudentsExamResults";
+import {DepHeadSidebar} from "../../components/DepHeadComponents/DepHeadSidebar";
 
-export const PgHeadExamResults = () => {
+export const DepHeadExamResults = () => {
     const {userId} = useContext(AuthContext)
     const {request, loading} = useHttp()
     const [userData, setUserData] = useState(null)
@@ -45,7 +45,7 @@ export const PgHeadExamResults = () => {
 
     return (
         <div id='wrapper'>
-            <PgHeadSidebar/>
+            <DepHeadSidebar/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <Topbar userData={userData}/>

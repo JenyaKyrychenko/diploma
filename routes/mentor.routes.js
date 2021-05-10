@@ -7,6 +7,18 @@ const bodyParser = require('body-parser')
 
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
+// GET mentor by email
+router.post('/email/',urlencodedParser, async (req, res) => {
+    try {
+        const email= req.body.email
+        const mentor = await Mentor.findOne({where:{email},include:User})
+        return res.json(mentor)
+    } catch (e) {
+        res.status(500).json({message: 'Щось пішло не так!'})
+        console.log(e)
+    }
+})
+
 // POST mentor create
 router.post('/create', async (req, res) => {
     try {

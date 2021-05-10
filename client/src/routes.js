@@ -18,6 +18,7 @@ import {PgHeadAddExam} from "./pages/pgHeadPages/PgHeadAddExam";
 import {PgHeadShowStudents} from "./pages/pgHeadPages/PgHeadShowStudents";
 import {StudentExamResults} from "./pages/studentPages/StudentExamResults";
 import {PgHeadExamResults} from "./pages/pgHeadPages/PgHeadExamResults";
+import {DepHeadExamResults} from "./pages/departmentHeadPages/DepHeadExamResults";
 
 export const useRoutes = (isAuthenticated, userStatus) => {
     if(isAuthenticated && userStatus){
@@ -73,6 +74,9 @@ export const useRoutes = (isAuthenticated, userStatus) => {
                     </Route>
                     <Route path="/dephead/speciality/add" exact>
                         <DepHeadAddSpeciality/>
+                    </Route>
+                    <Route path="/dephead/examresults" exact>
+                        <DepHeadExamResults/>
                     </Route>
                     <Redirect to="/dephead/home"/>
                 </Switch>

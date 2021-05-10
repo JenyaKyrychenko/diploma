@@ -42,46 +42,43 @@ export const RegistrationPage = () =>{
                         <div className="col-lg-7">
                             <div className="p-5">
                                 <div className="text-center">
-                                    <h1 className="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                    <h1 className="h4 text-gray-900 mb-4">Реєстрація</h1>
                                 </div>
                                 <form className="user">
                                     <div className="form-group row">
                                         <div className="col-sm-6 mb-3 mb-sm-0">
                                             <input type="text" className="form-control form-control-user"
                                                    id="exampleFirstName"
-                                                   placeholder="First Name" name='firstName' onChange={changeHandler}/>
+                                                   placeholder="Ім'я" name='firstName' onChange={changeHandler}/>
                                         </div>
                                         <div className="col-sm-6">
                                             <input type="text" className="form-control form-control-user"
                                                    id="exampleLastName"
-                                                   placeholder="Last Name" name='lastName' onChange={changeHandler}/>
+                                                   placeholder="Прізвище" name='lastName' onChange={changeHandler}/>
                                         </div>
                                     </div>
                                     <div className="form-group">
                                         <input type="email" className="form-control form-control-user"
                                                id="exampleInputEmail"
-                                               placeholder="Email Address" name='email' onChange={changeHandler}/>
+                                               placeholder="Email" name='email' onChange={changeHandler}/>
                                     </div>
                                     <div className="form-group row">
                                         <div className="col-sm-6 mb-3 mb-sm-0">
                                             <input type="password" className="form-control form-control-user"
-                                                   id="exampleInputPassword" placeholder="Password" name='password' onChange={changeHandler}/>
+                                                   id="exampleInputPassword" placeholder="Пароль" name='password' onChange={changeHandler}/>
                                         </div>
                                         <div className="col-sm-6">
                                             <input type="password" className="form-control form-control-user"
-                                                   id="exampleRepeatPassword" placeholder="Repeat Password" name='repeatPassword' onChange={changeHandler}/>
+                                                   id="exampleRepeatPassword" placeholder="Повторіть пароль" name='repeatPassword' onChange={changeHandler}/>
                                         </div>
                                     </div>
                                     <button className="btn btn-primary btn-user btn-block" onClick={registrationHandler} disabled={loading}>
-                                        Register Account
+                                        Зареєструватися
                                     </button>
                                 </form>
                                 <hr/>
                                     <div className="text-center">
-                                        <a className="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
-                                    <div className="text-center">
-                                        <NavLink className="small" to='/'>Already have an account? Login!</NavLink>
+                                        <NavLink className="small" to='/'>Вже маєте аккаунт? Ввійти!</NavLink>
                                     </div>
                             </div>
                         </div>

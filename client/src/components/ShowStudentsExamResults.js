@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import {Loader} from "../Loader";
-import {useHttp} from "../../hooks/http.hook";
+import {Loader} from "./Loader";
+import {useHttp} from "../hooks/http.hook";
 
-export const ShowStudentsExamResults = ({allStudents, loading, exams, specialitys}) => {
+export const ShowStudentsExamResults = ({allStudents, loading, exams, specialitys, title}) => {
     const {request} = useHttp()
 
     const [searchValue, setSearchValue] = useState('')
@@ -15,12 +15,12 @@ export const ShowStudentsExamResults = ({allStudents, loading, exams, speciality
     }
 
     const searchBySpeciality = async (event) => {
-        const student = await request(`/api/auth/users/students/search/speciality`, 'POST', {searchSpeciality:event.target.value})
+        const student = await request(`/api/auth/users/students/search/speciality`, 'POST', {searchSpeciality: event.target.value})
         setStudents(student)
     }
 
 
-    const resetSearch = ()=>{
+    const resetSearch = () => {
         setStudents(allStudents)
     }
 
@@ -47,21 +47,24 @@ export const ShowStudentsExamResults = ({allStudents, loading, exams, speciality
     return (
         <div className="container-fluid marginBottom">
             <div className='card-header py-3'>
-                <h4 className='m-0 font-weight-bold text-dark'>Результати екзаменів</h4>
+                <h4 className='m-0 font-weight-bold text-dark'>{title ? title : 'Результати іспитів'}</h4>
                 <div className="input-group mb-3 marginTop">
-                    <input onChange={changeSearch} value={searchValue} type="text" className="form-control" placeholder="Пошук" aria-label="Username"/>
+                    <input onChange={changeSearch} value={searchValue} type="text" className="form-control"
+                           placeholder="Пошук" aria-label="Username"/>
                     <span className="input-group-text" id="basic-addon3">Або</span>
                     <select onChange={searchBySpeciality} className="form-select" aria-label="Default select example">
                         <option value=''>Спеціальність</option>
                         {specialitys ?
-                            specialitys.map((spec,index)=>{
+                            specialitys.map((spec, index) => {
                                 return <option key={index}>{spec.specialityCode}</option>
                             })
-                        :''}
+                            : ''}
                     </select>
                 </div>
                 <div className="declarationContainer">
-                    <button className='btn btn-outline-primary buttonConfirmPage' onClick={resetSearch}>Показати всіх студентів</button>
+                    <button className='btn btn-outline-primary buttonConfirmPage' onClick={resetSearch}>Показати всіх
+                        студентів
+                    </button>
                 </div>
             </div>
             <div className='card shadow mb-4'>
