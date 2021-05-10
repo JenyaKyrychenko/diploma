@@ -5,21 +5,20 @@ import {AuthContext} from "../../context/AuthContext";
 import {useHttp} from "../../hooks/http.hook";
 import {Loader} from "../../components/Loader";
 import {PgHeadSidebar} from "../../components/PgHeadComponents/PgHeadSidebar";
-import {ShowStudents} from "../../components/PgHeadComponents/ShowStudents";
+import {ShowStudentsExamResults} from "../../components/PgHeadComponents/ShowStudentsExamResults";
 
-export const PgHeadShowStudents = () => {
+export const PgHeadExamResults = () => {
     const {userId} = useContext(AuthContext)
     const {request, loading} = useHttp()
     const [userData, setUserData] = useState(null)
     const [students, setStudents] = useState(null)
+    const [userExamResults, setUserExamResults] = useState(null)
     const [specialitys, setSpecialitys] = useState(null)
 
     const getName = useCallback(async () => {
         try {
-            const data = await request(`/api/auth/users/${userId}`, 'GET')
-            const specialitys = await request('/api/speciality/', 'GET')
-            setSpecialitys(specialitys)
-            setUserData(data)
+            const user = await request(`/api/auth/users/${userId}`, 'GET') // user data
+            setUserData(user)
         } catch (e) {
         }
     }, [userId, request])
@@ -30,8 +29,12 @@ export const PgHeadShowStudents = () => {
 
     useEffect(()=>{
         const getStudents = async ()=>{
-            const students = await request('/api/auth/users/students')
+            const students = await request('/api/auth/users/students') // all users with status:'student'
+            const examResults = await request(`/api/examresults/`) // all examResults
+            const specialitys = await request(`/api/speciality/`) // all specialitys
+            setSpecialitys(specialitys)
             setStudents(students)
+            setUserExamResults(examResults)
         }
         getStudents()
     },[request])
@@ -46,7 +49,7 @@ export const PgHeadShowStudents = () => {
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <Topbar userData={userData}/>
-                    <ShowStudents students={students} loading={loading} specialitys={specialitys}/>
+                    <ShowStudentsExamResults allStudents={students} loading={loading} exams={userExamResults} specialitys={specialitys}/>
                 </div>
                 <Footer/>
             </div>

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {Loader} from "../Loader";
 
-export const ShowStudents = ({students, loading, specialitys}) => {
+export const ShowMentorsStudents = ({students, loading}) => {
     useEffect(() => {
         if (!loading) {
             return <Loader/>
@@ -9,7 +9,7 @@ export const ShowStudents = ({students, loading, specialitys}) => {
     })
 
     if (!students) {
-        return <div className="container-fluid declarationContainer"><h3>На даний момент немає студентів</h3></div>
+        return <div className="container-fluid declarationContainer"><h3>На даний момент у Вас немає студентів</h3></div>
     }
 
     var number = 0 // for correct listID
@@ -17,7 +17,7 @@ export const ShowStudents = ({students, loading, specialitys}) => {
     return (
         <div className='card shadow mb-4'>
             <div className="card-body">
-                <h3>Список студентів</h3>
+                <h3>Список ваших студентів</h3>
                 <div className="table-responsive">
                     <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
                         <thead>
@@ -38,15 +38,7 @@ export const ShowStudents = ({students, loading, specialitys}) => {
                                     <td>{student.firstName}</td>
                                     <td>{student.lastName}</td>
                                     <td>{student.email}</td>
-                                    {specialitys ?
-                                        specialitys.map((speciality, index) => {
-                                            if (speciality.id === student.specialityId) {
-                                                return <td key={index}>{speciality.specialityCode}</td>
-                                            } else {
-                                                return null
-                                            }
-                                        })
-                                        : null}
+                                    <td>{student.speciality.specialityCode}</td>
                                 </tr>
                             } else {
                                 return null

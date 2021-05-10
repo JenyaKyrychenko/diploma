@@ -4,8 +4,9 @@ import {Topbar} from "../../components/Topbar";
 import {AuthContext} from "../../context/AuthContext";
 import {useHttp} from "../../hooks/http.hook";
 import {Loader} from "../../components/Loader";
-import {ShowStudents} from "../../components/MentorsComponents/ShowStudents";
+
 import {MentorSidebar} from "../../components/MentorsComponents/MentorSidebar";
+import {ShowMentorsStudents} from "../../components/MentorsComponents/ShowMentorsStudents";
 
 export const MentorsStudents = () => {
     const {userId} = useContext(AuthContext)
@@ -39,7 +40,7 @@ export const MentorsStudents = () => {
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <Topbar userData={userData}/>
-                    <ShowStudents students={students}loading={loading}/>
+                    <ShowMentorsStudents students={students} loading={loading}/>
                 </div>
                 <Footer/>
             </div>

@@ -7,6 +7,18 @@ const bodyParser = require('body-parser')
 
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
+// GET all ExamResults
+router.get('/', async (req, res) => {
+    try {
+        const userId = req.params.userId
+        const examResults = await ExamResults.findAll({include:[Exam,Speciality]})
+        res.json(examResults)
+    } catch (e) {
+        res.status(500).json({message: 'Щось пішло не так!'})
+        console.log(e)
+    }
+})
+
 // GET examResults for user
 router.get('/:userId', async (req, res) => {
     try {

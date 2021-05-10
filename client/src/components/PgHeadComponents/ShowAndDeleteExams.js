@@ -53,15 +53,7 @@ export const ShowAndDeleteExams = ({specialitys}) => {
 
                                 <td>{e.subjectExam === 'english' ? 'Іноземна мова' : e.subjectExam === 'speciality' ?
                                     'Зі спеціальності' : e.subjectExam === 'additional' ? 'Додатковий' : null}</td>
-
-
-                                {specialitys.map((s,index)=>{
-                                    if(s.id === e.specialityId){
-                                        return <td key={index}>{s.specialityCode}</td>
-                                    } else {
-                                        return null
-                                    }
-                                })}
+                                <td>{e.speciality.specialityCode}</td>
                                 <td>{new Date(e.examDate).toLocaleDateString()}</td>
                                 <td>{e.examAddress}</td>
                                 <td>

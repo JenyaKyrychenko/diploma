@@ -5,8 +5,10 @@ const jwt = require('jsonwebtoken')
 const {check, validationResult} = require('express-validator')
 const User = require('./../models/User')
 const Speciality = require('./../models/Speciality')
+const Mentor = require('./../models/Mentor')
 const router = Router()
 const bodyParser = require('body-parser')
+const {Op} = require('sequelize')
 
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -14,8 +16,8 @@ const urlencodedParser = bodyParser.urlencoded({extended: false});
 router.post('/registration',
     [
         check('email', 'Некоректный email').isEmail(),
-        check('firstName','Введите имя').isString().not(Number).isEmpty(),
-        check('lastName','Введите фамилию').isString().not(Number).isEmpty(),
+        check('firstName', 'Введите имя').isString().not(Number).isEmpty(),
+        check('lastName', 'Введите фамилию').isString().not(Number).isEmpty(),
         check('password', 'Минимальная длина пароля 6 символов').isLength({min: 6}),
     ],
     async (req, res) => {
@@ -30,7 +32,7 @@ router.post('/registration',
             }
             const {firstName, lastName, email, password, repeatPassword} = req.body
 
-            if(password !== repeatPassword){
+            if (password !== repeatPassword) {
                 return res.status(400).json({message: 'Повторите пароль!'})
             }
 
@@ -70,7 +72,7 @@ router.post('/login',
 
             const {email, password} = req.body
 
-            const user = await User.findOne({where:{email}})
+            const user = await User.findOne({where: {email}})
 
             if (!user) {
                 return res.status(400).json({message: 'Позьзователь не найден'})
@@ -99,10 +101,62 @@ router.post('/login',
 // GET all users
 router.get('/users', async (req, res) => {
     try {
-        const users = await User.findAll()
+        const users = await User.findAll({include: Speciality})
         res.json(users)
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так!'})
+    }
+})
+
+// GET all Students
+router.get('/users/students', async (req, res) => {
+    try {
+        const users = await User.findAll({
+            where: {status: 'student'},
+            include: [{model: Speciality}, {model: Mentor}]
+        })
+        res.json(users)
+    } catch (e) {
+        res.status(500).json({message: 'Что-то пошло не так!'})
+        console.log(e)
+    }
+})
+
+// GET all students By SeachValue
+router.post('/users/students/search', async (req, res) => {
+    try {
+        const searchValue = req.body.searchValue
+        const users = await User.findAll({
+            where: {
+                status: 'student',
+                [Op.or]: [{lastName: {[Op.substring]: searchValue}},
+                    {firstName: {[Op.substring]: searchValue}},
+                    {email: {[Op.substring]: searchValue}}]
+            },
+            include: [{model: Speciality}, {model: Mentor}]
+        })
+        res.json(users)
+    } catch (e) {
+        res.status(500).json({message: 'Что-то пошло не так!'})
+        console.log(e)
+    }
+})
+
+// GET all students By Speciality
+router.post('/users/students/search/speciality', async (req, res) => {
+    try {
+        const searchSpeciality = req.body.searchSpeciality
+        console.log(searchSpeciality)
+        const users = await User.findAll({
+            where: {
+                status: 'student',
+            },
+            include: [{model: Speciality,where:{specialityCode:searchSpeciality}}, {model: Mentor}]
+        })
+        res.json(users)
+    } catch (e) {
+        res.status(500).json({message: 'Что-то пошло не так!'})
+        console.log(e)
     }
 })
 
@@ -111,7 +165,7 @@ router.get('/users', async (req, res) => {
 router.get('/users/:id', async (req, res) => {
     try {
         const id = req.params.id
-        const user = await User.findOne({where:{id},include:Speciality})
+        const user = await User.findOne({where: {id}, include: Speciality})
         res.json(user)
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так!'})

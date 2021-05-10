@@ -27,11 +27,12 @@ router.post('/create', async (req, res) => {
 })
 
 // GET mentors students
-router.post('/students', async (req, res) => {
+router.post('/students',urlencodedParser, async (req, res) => {
     try {
         const email= req.body.email
-        const candidate = await Mentor.findOne({where:{email},include:User})
-        return res.json(candidate.users)
+        const mentor = await Mentor.findOne({where:{email},include:User})
+        const students = await User.findAll({where:{mentorId:mentor.id},include:Speciality})
+        return res.json(students)
     } catch (e) {
         res.status(500).json({message: 'Щось пішло не так!'})
         console.log(e)

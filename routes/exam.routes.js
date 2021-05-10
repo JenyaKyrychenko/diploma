@@ -9,7 +9,7 @@ const urlencodedParser = bodyParser.urlencoded({extended: false});
 // GET all exams
 router.get('/', async (req, res) => {
     try {
-        const exams = await Exam.findAll()
+        const exams = await Exam.findAll({include:Speciality})
         res.json(exams)
 
     } catch (e) {
