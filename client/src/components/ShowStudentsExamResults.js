@@ -1,9 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import {Loader} from "./Loader";
 import {useHttp} from "../hooks/http.hook";
+import {AuthContext} from "../context/AuthContext";
+import {useMessage} from "../hooks/message.hook";
 
 export const ShowStudentsExamResults = ({allStudents, loading, exams, specialitys, title}) => {
     const {request} = useHttp()
+    const message = useMessage()
+    const {userStatus} = useContext(AuthContext)
 
     const [searchValue, setSearchValue] = useState('')
     const [students, setStudents] = useState(null)
@@ -19,9 +23,20 @@ export const ShowStudentsExamResults = ({allStudents, loading, exams, speciality
         setStudents(student)
     }
 
-
     const resetSearch = () => {
         setStudents(allStudents)
+    }
+
+    const confirmAddmission = async (event) => {
+        const userId = event.target.id
+        const res = await request(`/api/auth/addmission/add/result/${userId}`, 'POST', {result: true})
+        message(res.message)
+    }
+
+    const deniedAddmission = async (event) => {
+        const userId = event.target.id
+        const res = await request(`/api/auth/addmission/add/result/${userId}`, 'POST', {result: false})
+        message(res.message)
     }
 
 
@@ -81,6 +96,7 @@ export const ShowStudentsExamResults = ({allStudents, loading, exams, speciality
                                         &emsp; <strong>Ім'я:&ensp;</strong> {student.firstName}
                                         &emsp; <strong> Email:&ensp;</strong> {student.email}
                                         &emsp; <strong>Спеціальність:&ensp;</strong> {student.speciality.specialityCode}
+                                        &emsp; <strong>Результат:&ensp;</strong> {student.admissionResult === true ? 'Зарахований' : student.admissionResult === false ? 'Відмовлено' : 'Не обрано'}
                                     </button>
                                 </h2>
                                 <div id={`collapse${student.id}`} className="accordion-collapse collapse"
@@ -103,11 +119,23 @@ export const ShowStudentsExamResults = ({allStudents, loading, exams, speciality
 
                                                         </li>
                                                     </ul>
+
                                                 )
                                             } else {
                                                 return null
                                             }
                                         }) : ''}
+                                        {userStatus === 'pghead' && student.admissionResult === null ?
+                                            <>
+                                                <button onClick={confirmAddmission} id={student.id}
+                                                        className='btn btn-outline-success buttonConfirmPage'>Зарахувати
+                                                </button>
+                                                &#8195;
+                                                <button onClick={deniedAddmission} id={student.id}
+                                                        className='btn btn-outline-danger buttonConfirmPage'>Відмовити
+                                                </button>
+                                            </>
+                                            : ''}
                                     </div>
                                 </div>
                             </div>

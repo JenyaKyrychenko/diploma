@@ -39,8 +39,7 @@ const User = sequelize.define("user", {
     },
     admissionResult: {
         type: Sequelize.BOOLEAN,
-        required:false,
-        defaultValue: false
+        required:false
     }
 }, {
     charset: 'utf8',

@@ -173,6 +173,21 @@ router.post('/users/students/search/speciality', async (req, res) => {
     }
 })
 
+// confirm/denied addmision
+router.post('/addmission/add/result/:userId', async (req, res) => {
+    try {
+        const result = req.body.result
+        const id = req.params.userId
+        const user = await User.findOne({where:{id}})
+        user.admissionResult = result
+        await user.save()
+        res.json({message:'Результат додано!'})
+    } catch (e) {
+        res.status(500).json({message: 'Что-то пошло не так!'})
+        console.log(e)
+    }
+})
+
 // getByID
 // /api/user/:id
 router.get('/users/:id', async (req, res) => {
