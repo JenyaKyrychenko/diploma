@@ -2,12 +2,17 @@ import React, {useContext} from 'react'
 import undrawProfile from './../img/undraw_profile.svg'
 import {NavLink} from "react-router-dom";
 import {AuthContext} from "../context/AuthContext";
+import {Loader} from "./Loader";
 
 export const Topbar = ({userData})=>{
     const {logout} = useContext(AuthContext)
 
     const logoutHandler = () =>{
         logout()
+    }
+
+    if(!userData){
+        return <Loader/>
     }
 
     return(
@@ -58,7 +63,7 @@ export const Topbar = ({userData})=>{
                     {/*Dropdown - User Information*/}
                     <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                          aria-labelledby="userDropdown">
-                        <a className="dropdown-item" href="/student/profile">
+                        <a className="dropdown-item" href={`/${userData.status}/profile`}>
                             <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
                         </a>

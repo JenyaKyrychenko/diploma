@@ -1,13 +1,13 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react'
-import {StudentSidebar} from "../../components/StudentsComponents/StudentSidebar";
 import {Footer} from "../../components/Footer";
 import {Topbar} from "../../components/Topbar";
 import {AuthContext} from "../../context/AuthContext";
 import {useHttp} from "../../hooks/http.hook";
 import {Loader} from "../../components/Loader";
 import {Profile} from "../../components/Profile";
+import {MentorSidebar} from "../../components/MentorsComponents/MentorSidebar";
 
-export const StudentProfilePage = () => {
+export const MentorProfilePage = () => {
     const {userId} = useContext(AuthContext)
     const {request, loading} = useHttp()
     const [userData, setUserData] = useState(null)
@@ -32,7 +32,7 @@ export const StudentProfilePage = () => {
 
     return (
         <div id='wrapper'>
-            <StudentSidebar/>
+            <MentorSidebar/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <Topbar userData={userData}/>

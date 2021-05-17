@@ -193,7 +193,7 @@ router.post('/addmission/add/result/:userId', async (req, res) => {
 router.get('/users/:id', async (req, res) => {
     try {
         const id = req.params.id
-        const user = await User.findOne({where: {id}, include: Speciality})
+        const user = await User.findOne({where: {id}, include: [Speciality,Mentor]})
         res.json(user)
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так!'})

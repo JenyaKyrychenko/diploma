@@ -20,15 +20,15 @@ import {StudentExamResults} from "./pages/studentPages/StudentExamResults";
 import {PgHeadExamResults} from "./pages/pgHeadPages/PgHeadExamResults";
 import {DepHeadExamResults} from "./pages/departmentHeadPages/DepHeadExamResults";
 import {MentorChooseStudent} from "./pages/mentorPages/MentorChooseStudent";
+import {PgHeadProfilePage} from "./pages/pgHeadPages/PgHeadProfilePage";
+import {MentorProfilePage} from "./pages/mentorPages/MentorProfilePage";
+import {DepHeadProfilePage} from "./pages/departmentHeadPages/DepHeadProfilePage";
 
 export const useRoutes = (isAuthenticated, userStatus) => {
     if(isAuthenticated && userStatus){
         if(userStatus === 'student') { // postgraduate
             return (
                 <Switch>
-                    <Route path="/student/home" exact>
-                        <StudentHomePage/>
-                    </Route>
                     <Route path="/student/createform" exact>
                         <StudentCreateFormPage/>
                     </Route>
@@ -47,15 +47,15 @@ export const useRoutes = (isAuthenticated, userStatus) => {
                     <Route path="/student/exam/results" exact>
                         <StudentExamResults/>
                     </Route>
-                    <Redirect to="/student/home"/>
+                    <Redirect to="/student/profile"/>
                 </Switch>
             )
         }
         if(userStatus === 'mentor'){ // science mentor
             return (
                 <Switch>
-                    <Route path="/mentor/home" exact>
-                        <MentorHomePage/>
+                    <Route path="/mentor/profile" exact>
+                        <MentorProfilePage/>
                     </Route>
                     <Route path="/mentor/students" exact>
                         <MentorsStudents/>
@@ -66,15 +66,15 @@ export const useRoutes = (isAuthenticated, userStatus) => {
                     <Route path="/mentor/choosestudent" exact>
                         <MentorChooseStudent/>
                     </Route>
-                    <Redirect to="/mentor/home"/>
+                    <Redirect to="/mentor/profile"/>
                 </Switch>
             )
         }
         if(userStatus === 'dephead'){ // department head
             return (
                 <Switch>
-                    <Route path="/dephead/home" exact>
-                        <DepHeadHomePage/>
+                    <Route path="/dephead/profile" exact>
+                        <DepHeadProfilePage/>
                     </Route>
                     <Route path="/dephead/speciality/add" exact>
                         <DepHeadAddSpeciality/>
@@ -82,15 +82,15 @@ export const useRoutes = (isAuthenticated, userStatus) => {
                     <Route path="/dephead/examresults" exact>
                         <DepHeadExamResults/>
                     </Route>
-                    <Redirect to="/dephead/home"/>
+                    <Redirect to="/dephead/profile"/>
                 </Switch>
             )
         }
         if(userStatus === 'pghead'){ // postgraduate head
             return (
                 <Switch>
-                    <Route path="/pghead/home" exact>
-                        <PgHeadHomePage/>
+                    <Route path="/pghead/profile" exact>
+                        <PgHeadProfilePage/>
                     </Route>
                     <Route path="/pghead/exam/add" exact>
                         <PgHeadAddExam/>
@@ -101,7 +101,7 @@ export const useRoutes = (isAuthenticated, userStatus) => {
                     <Route path="/pghead/students/examresults" exact>
                         <PgHeadExamResults/>
                     </Route>
-                    <Redirect to="/pghead/home"/>
+                    <Redirect to="/pghead/profile"/>
                 </Switch>
             )
         }
