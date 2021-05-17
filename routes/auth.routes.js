@@ -122,6 +122,20 @@ router.get('/users/students', async (req, res) => {
     }
 })
 
+// GET all Students who have not mentor
+router.get('/users/students/nomentor', async (req, res) => {
+    try {
+        const users = await User.findAll({
+            where: {status: 'student', mentorId:null},
+            include: [{model: Speciality}, {model: Mentor}]
+        })
+        res.json(users)
+    } catch (e) {
+        res.status(500).json({message: 'Что-то пошло не так!'})
+        console.log(e)
+    }
+})
+
 // GET all students By SeachValue
 router.post('/users/students/search', async (req, res) => {
     try {
@@ -146,7 +160,6 @@ router.post('/users/students/search', async (req, res) => {
 router.post('/users/students/search/speciality', async (req, res) => {
     try {
         const searchSpeciality = req.body.searchSpeciality
-        console.log(searchSpeciality)
         const users = await User.findAll({
             where: {
                 status: 'student',

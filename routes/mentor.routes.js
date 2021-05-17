@@ -51,6 +51,36 @@ router.post('/students',urlencodedParser, async (req, res) => {
     }
 })
 
+// GET mentors specialities
+router.post('/specialities',urlencodedParser, async (req, res) => {
+    try {
+        const email= req.body.email
+        const mentor = await Mentor.findOne({where:{email},include:Speciality})
+        if(!mentor){
+            return res.json({message:'Ви не реєструвалися, як керівник!'})
+        }
+        return res.json(mentor.specialities)
+    } catch (e) {
+        res.status(500).json({message: 'Щось пішло не так!'})
+        console.log(e)
+    }
+})
+
+// Add mentor for student
+router.post('/add/student/:id',urlencodedParser, async (req, res) => {
+    try {
+        const id = req.params.id
+        const mentorEmail = req.body.mentorEmail
+        const mentor = await Mentor.findOne({where:{email:mentorEmail},include:User})
+        const student = await User.findOne({where:{id}, include:Mentor})
+        student.setMentor(mentor)
+        return res.json({message:'Студента обрано!'})
+    } catch (e) {
+        res.status(500).json({message: 'Щось пішло не так!'})
+        console.log(e)
+    }
+})
+
 
 
 module.exports = router

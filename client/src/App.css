@@ -176,3 +176,14 @@ body {
 .marginBottom{
   margin-bottom: 70px;
 }
+
+.my_bg_image {
+  background: url("https://progresstech.ua/uploads/part_elements/9f/0a/f-ec9sbt21p_5419f5b4.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.width-30{
+  margin: 10px 10px 0 20px;
+  width: 30%;
+}
