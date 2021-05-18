@@ -1,8 +1,10 @@
 import React, {useEffect} from 'react'
 import {Loader} from "../Loader";
 import {useHttp} from "../../hooks/http.hook";
+import {useMessage} from "../../hooks/message.hook";
 
 export const ShowStudents = ({students, loading}) => {
+    const message = useMessage()
     const {loadFile} = useHttp()
     useEffect(() => {
         if (!loading) {
@@ -22,7 +24,7 @@ export const ShowStudents = ({students, loading}) => {
             link.click()
             link.remove()
         }catch (e) {
-            alert(e.message)
+            message(e.message)
         }
     }
 

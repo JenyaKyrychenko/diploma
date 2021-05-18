@@ -1,12 +1,8 @@
 import React from 'react'
 import {Redirect, Route, Switch} from "react-router-dom";
 import {StudentCreateFormPage} from "./pages/studentPages/StudentCreateFormPage";
-import {StudentHomePage} from "./pages/studentPages/StudentHomePage";
 import {LoginPage} from "./pages/authorizationPages/LoginPage";
 import {RegistrationPage} from "./pages/authorizationPages/RegistrationPage";
-import {MentorHomePage} from "./pages/mentorPages/MentorHomePage";
-import {DepHeadHomePage} from "./pages/departmentHeadPages/DepHeadHomePage";
-import {PgHeadHomePage} from "./pages/pgHeadPages/PgHeadHomePage";
 import {StudentProfilePage} from "./pages/studentPages/StudentProfilePage";
 import {StudentChooseSpeciality} from "./pages/studentPages/StudentChooseSpeciality";
 import {StudentResearchWork} from "./pages/studentPages/StudentResearchWork";
@@ -23,6 +19,7 @@ import {MentorChooseStudent} from "./pages/mentorPages/MentorChooseStudent";
 import {PgHeadProfilePage} from "./pages/pgHeadPages/PgHeadProfilePage";
 import {MentorProfilePage} from "./pages/mentorPages/MentorProfilePage";
 import {DepHeadProfilePage} from "./pages/departmentHeadPages/DepHeadProfilePage";
+import {DepHeadShowAllStudents} from "./pages/departmentHeadPages/DepHeadShowAllStudents";
 
 export const useRoutes = (isAuthenticated, userStatus) => {
     if(isAuthenticated && userStatus){
@@ -81,6 +78,9 @@ export const useRoutes = (isAuthenticated, userStatus) => {
                     </Route>
                     <Route path="/dephead/examresults" exact>
                         <DepHeadExamResults/>
+                    </Route>
+                    <Route path="/dephead/students" exact>
+                        <DepHeadShowAllStudents/>
                     </Route>
                     <Redirect to="/dephead/profile"/>
                 </Switch>
