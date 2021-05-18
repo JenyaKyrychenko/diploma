@@ -7,67 +7,26 @@ const loadDocument = require('../FileTemplater')
 
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-// GET /api/declaration/
-router.post('/user/:id/add', async (req, res) => {
+router.post('/user/:userId/add', async (req, res) => {
     try {
-        const id = req.params.id
-        const name = req.body.name
-        const surname = req.body.surname
-        const nationality = req.body.nationality
-        const birthday = req.body.birthday
-        const passportId = req.body.passport
-        const gender = req.body.gender
-        const schoolGraduateDate = req.body.school
-        const address = req.body.address
-        const phoneNumber = req.body.phone
-        const email = req.body.email
-        const language = req.body.language
+        const userId = req.params.userId
+        const user = await User.findOne({where:{id:userId},include:Declaration})
+        const userEmail = user.email
+        const form = {...req.body}
 
-        let declaration = await Declaration.findOne({where: {userId: id}})
-        if (declaration) {
-            declaration.name = name
-            declaration.surname = surname
-            declaration.nationality = nationality
-            declaration.birthday = birthday
-            declaration.passportId = passportId
-            declaration.gender = gender
-            declaration.schoolGraduateDate = schoolGraduateDate
-            declaration.address = address
-            declaration.phoneNumber = phoneNumber
-            declaration.email = email
-            declaration.language = language
+        let declaration = await Declaration.findOne({where:{userId}})
+        if(declaration){
+            declaration.update({...form})
             declaration.save()
         } else {
-            declaration = await Declaration.create({
-                name,
-                surname,
-                nationality,
-                birthday,
-                passportId,
-                gender,
-                schoolGraduateDate,
-                address,
-                phoneNumber,
-                email,
-                language
-            })
+            declaration = await Declaration.create({...form})
+            user.setDeclaration(declaration)
         }
-        const user = await User.findOne({where: {id}, include: Declaration})
-        user.setDeclaration(declaration)
+
         loadDocument('declaration', {
-            name,
-            surname,
-            nationality,
-            birthday,
-            passportId,
-            gender,
-            schoolGraduateDate,
-            address,
-            phoneNumber,
-            email,
-            language
-        },user.email)
-        res.json('Ok!')
+            ...form
+        },userEmail)
+        res.json({message:'Заяву збережено!'})
     } catch (e) {
         res.status(500).json({message: 'Щось пішло не так!'})
         console.log(e)

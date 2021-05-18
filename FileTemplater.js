@@ -45,24 +45,13 @@ const loadDocument = (fileName, inputData, userEmail) => {
     switch (fileName) {
         case 'researchwork' : {
             doc.setData({
-                name: inputData.name,
-                text: inputData.text
+                ...inputData
             });
             break
         }
         case 'declaration': {
             doc.setData({
-                name: inputData.name,
-                surname: inputData.surname,
-                nationality: inputData.nationality,
-                passportId: inputData.passportId,
-                birthday: inputData.birthday,
-                gender: inputData.gender,
-                schoolGraduateDate: inputData.schoolGraduateDate,
-                address: inputData.address,
-                phoneNumber: inputData.phoneNumber,
-                email: inputData.email,
-                language: inputData.language
+                ...inputData
             });
             break
         }

@@ -9,12 +9,87 @@ const Declaration = sequelize.define("declaration", {
         primaryKey: true,
         allowNull: false
     },
-    name: {
+    firstName: {
         type: Sequelize.STRING,
         required:true,
         allowNull: false
     },
-    surname: {
+    lastName: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    patronymic: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    formOfEducation: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    competitiveOffer: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    speciality: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    educationProgram: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    educationDegree: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    contract: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    budget: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    wasStudied: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    wasGraduated: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    language: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    specialConditions: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    gpa: {
+        type: Sequelize.INTEGER,
+        required:true,
+        allowNull: false
+    },
+    hostel: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    gender: {
         type: Sequelize.STRING,
         required:true,
         allowNull: false
@@ -24,28 +99,48 @@ const Declaration = sequelize.define("declaration", {
         required:true,
         allowNull: false
     },
-    passportId: {
-        type: Sequelize.STRING,
-        required:true,
-        allowNull: false
-    },
     birthday: {
         type: Sequelize.DATE,
         required:true,
         allowNull: false
     },
-    gender: {
+    placeOfBirth: {
         type: Sequelize.STRING,
         required:true,
         allowNull: false
     },
-    schoolGraduateDate: {
-        type: Sequelize.DATE,
+    street: {
+        type: Sequelize.STRING,
         required:true,
         allowNull: false
     },
-    address: {
+    house: {
         type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    flatNumber: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    city: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    district: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    region: {
+        type: Sequelize.STRING,
+        required:true,
+        allowNull: false
+    },
+    index: {
+        type: Sequelize.INTEGER,
         required:true,
         allowNull: false
     },
@@ -59,11 +154,12 @@ const Declaration = sequelize.define("declaration", {
         required:true,
         allowNull: false
     },
-    language: {
+    additionalInfo: {
         type: Sequelize.STRING,
         required:true,
         allowNull: false
-    }
+    },
+
 },{
     charset: 'utf8',
     collate: 'utf8_general_ci',

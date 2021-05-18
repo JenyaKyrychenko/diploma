@@ -1,16 +1,17 @@
-import React, {useContext, useState, useCallback, useEffect} from 'react'
+import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {StudentSidebar} from "../../components/StudentsComponents/StudentSidebar";
 import {Topbar} from "../../components/Topbar";
 import {Footer} from "../../components/Footer";
 import {AuthContext} from "../../context/AuthContext";
 import {useHttp} from "../../hooks/http.hook";
 import {Loader} from "../../components/Loader";
-import CreateDeclaration from "../../components/StudentsComponents/CreateDeclaration";
+import CreateStatement from "../../components/StudentsComponents/CreateStatement";
 
 export const StudentCreateFormPage = () => {
     const {userId} = useContext(AuthContext)
     const {request, loading} = useHttp()
     const [userData, setUserData] = useState(null)
+    const [specialities, setSpecialities] = useState(null)
 
     const getName = useCallback(async () => {
         try {
@@ -19,6 +20,14 @@ export const StudentCreateFormPage = () => {
         } catch (e) {
         }
     }, [userId, request])
+
+    useEffect(() => {
+        const getSpecialities = async () => {
+            const specialities = await request('/api/speciality/')
+            setSpecialities(specialities)
+        }
+        getSpecialities()
+    }, [request])
 
     useEffect(() => {
         getName()
@@ -34,7 +43,7 @@ export const StudentCreateFormPage = () => {
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <Topbar userData={userData}/>
-                    <CreateDeclaration/>
+                    <CreateStatement specialities={specialities}/>
                 </div>
                 <Footer/>
             </div>
