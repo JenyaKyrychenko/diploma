@@ -188,6 +188,22 @@ router.post('/addmission/add/result/:userId', async (req, res) => {
     }
 })
 
+
+//ADMIN change user status
+router.post('/admin/status', async (req, res) => {
+    try {
+        const userId = req.body.userId
+        const status = req.body.status
+        const user = await User.findOne({where:{id:userId}})
+        user.status = status
+        await user.save()
+        res.json({message:'Статус змінено!'})
+    } catch (e) {
+        res.status(500).json({message: 'Что-то пошло не так!'})
+        console.log(e)
+    }
+})
+
 // getByID
 // /api/user/:id
 router.get('/users/:id', async (req, res) => {

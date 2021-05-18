@@ -20,6 +20,7 @@ import {PgHeadProfilePage} from "./pages/pgHeadPages/PgHeadProfilePage";
 import {MentorProfilePage} from "./pages/mentorPages/MentorProfilePage";
 import {DepHeadProfilePage} from "./pages/departmentHeadPages/DepHeadProfilePage";
 import {DepHeadShowAllStudents} from "./pages/departmentHeadPages/DepHeadShowAllStudents";
+import {AdminHomePage} from "./pages/adminPages/AdminHomePage";
 
 export const useRoutes = (isAuthenticated, userStatus) => {
     if(isAuthenticated && userStatus){
@@ -102,6 +103,16 @@ export const useRoutes = (isAuthenticated, userStatus) => {
                         <PgHeadExamResults/>
                     </Route>
                     <Redirect to="/pghead/profile"/>
+                </Switch>
+            )
+        }
+        if(userStatus === 'admin'){ // postgraduate head
+            return (
+                <Switch>
+                    <Route path="/admin/home" exact>
+                        <AdminHomePage/>
+                    </Route>
+                    <Redirect to="/admin/home"/>
                 </Switch>
             )
         }
