@@ -17,10 +17,10 @@ export const Profile = ({userData}) => {
                     <p className="card-text">{userData.firstName}</p>
                     <hr/>
                     <h5 className="card-title">Прізвище</h5>
-                    <p className="card-text">{userData.firstName}</p>
+                    <p className="card-text">{userData.lastName}</p>
                     <hr/>
                     <h5 className="card-title">Email</h5>
-                    <p className="card-text">{userData.firstName}</p>
+                    <p className="card-text">{userData.email}</p>
                     {userData.status === 'student' ?
                         <>
                             <hr/>

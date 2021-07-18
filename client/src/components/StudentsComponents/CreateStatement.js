@@ -37,7 +37,6 @@ const CreateStatement = ({specialities}) => {
         index: '',
         phoneNumber: '',
         email: '',
-        address: '',
         additionalInfo: '',
     })
 
@@ -95,7 +94,6 @@ const CreateStatement = ({specialities}) => {
                     <label className="font-weight-bold">Прізвище:</label>
                     <input onChange={changeFormElement} name='lastName' value={form.lastName} type="text"
                            className={`form-control`}/>
-                    <p className='red-color'>{form.lastName}</p>
                 </div>
 
                 {/*Ім'я*/}
@@ -104,7 +102,6 @@ const CreateStatement = ({specialities}) => {
                     <label className="font-weight-bold">Ім'я:</label>
                     <input onChange={changeFormElement} name='firstName' value={form.firstName} type="text"
                            className={`form-control`}/>
-                    <p className='red-color'>{form.firstName}</p>
                 </div>
 
                 {/*По-батькові*/}
@@ -113,7 +110,6 @@ const CreateStatement = ({specialities}) => {
                     <label className="font-weight-bold">По-батькові:</label>
                     <input onChange={changeFormElement} name='patronymic' value={form.patronymic} type="text"
                            className={`form-control`}/>
-                    <p className='red-color'>{form.patronymic}</p>
                 </div>
 
                 {/*Форма навчання*/}
@@ -127,7 +123,6 @@ const CreateStatement = ({specialities}) => {
                         <option>заочна</option>
                         <option>вечірня</option>
                     </select>
-                    <p className='red-color'>{form.formOfEducation}</p>
                 </div>
 
                 {/*Конкурсна пропозиція*/}
@@ -137,7 +132,6 @@ const CreateStatement = ({specialities}) => {
                     <input onChange={changeFormElement} name='competitiveOffer' value={form.competitiveOffer}
                            type="text"
                            className={`form-control`}/>
-                    <p className='red-color'>{form.competitiveOffer}</p>
                 </div>
 
                 {/*Спеціальність*/}
@@ -152,7 +146,6 @@ const CreateStatement = ({specialities}) => {
                                            value={`${spec.specialityCode} - ${spec.specialityName}`}>{spec.specialityCode}</option>
                         }) : ''}
                     </select>
-                    <p className='red-color'>{form.speciality}</p>
                 </div>
 
                 {/*Назва освітньої програми*/}
@@ -162,7 +155,6 @@ const CreateStatement = ({specialities}) => {
                     <input onChange={changeFormElement} name='educationProgram' value={form.educationProgram}
                            type="text"
                            className={`form-control`}/>
-                    <p className='red-color'>{form.educationProgram}</p>
                 </div>
 
                 {/*Назва освітнього / освітньо-кваліфікаційного рівня / ступеня*/}
@@ -171,7 +163,6 @@ const CreateStatement = ({specialities}) => {
                     <label className="font-weight-bold">Назва освітнього / освітньо-кваліфікаційного рівня / ступеня:</label>
                     <input onChange={changeFormElement} name='educationDegree' value={form.educationDegree} type="text"
                            className={`form-control`}/>
-                    <p className='red-color'>{form.educationDegree}</p>
                 </div>
 
                 {/*Бюджет / Контракт*/}
