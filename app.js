@@ -15,13 +15,13 @@ app.use('/api/exam', require('./routes/exam.routes'))
 app.use('/api/examresults', require('./routes/examresult.routes'))
 app.use('/api/mentor', require('./routes/mentor.routes'))
 
-if(process.env.NODE_ENV === 'production'){
+// if(process.env.NODE_ENV === 'production'){
     app.use('/', express.static(path.join(__dirname, 'client', 'build')))
 
     app.get('*',(req,res)=>{
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
-}
+// }
 
 const PORT = process.env.PORT || 5000
 
